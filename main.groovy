@@ -17,7 +17,7 @@ job('Seed cicdTest02') {
   }
   steps {
     dsl {
-      external('*.groovy')  
+      external('*.*')  
       // default behavior
       // removeAction('IGNORE')      
       removeAction('DELETE')
