@@ -11,22 +11,16 @@ job('Seed cicdTest01') {
     }
   }
 }
-pipelineJob("pipeline-running-terraform") {
+job('Seed cicdTest02') {
   scm {
     git ('https://github.com/buturupuinc/cicdtest02.git')
   }
-  logRotator{
-        numToKeep 30
+  steps {
+    dsl {
+      external('*.*')  
+      // default behavior
+      // removeAction('IGNORE')      
+      removeAction('DELETE')
     }
-    definition {
-        cps {
-            sandbox()
-            script("""
-                node {
-                    stage 'Build Cloud'
-                    bat 'command.bat'
-                }
-            """.stripIndent())
-        }
-    }
+  }
 }
